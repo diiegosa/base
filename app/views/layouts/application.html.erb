@@ -8,42 +8,140 @@
     <title>Base</title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    
+    <style>
+      header, main, footer {
+	padding-left: 300px;
+}
 
-  <!-- Google Font -->
-  <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+@media only screen and (max-width : 992px) {
+	header, main, footer {
+		padding-left: 0;
+	}
+}
+    </style>
+    <script>
+
+      $(document).ready(function(){
+  $('.sidenav').sidenav();
+	$('#sidebar-1').sidenav({ edge: 'left' });
+	$('#sidebar-2').sidenav({ edge: 'right' });
+	
+	// ADD CLASS TO SIDEBAR-2 VIA JAVASCRIPT
+	// See: https://stackoverflow.com/questions/29593944/css-media-query-adding-class-to-html
+	// And: http://jsfiddle.net/9y1p42Lq/
+	//
+	// ON DOCUMENT READY
+	if ($(window).width() >= 1925) {
+		$('#sidebar-2').addClass("sidenav-fixed");
+		$('#burger-icon-2').addClass("hide");
+	}
+	else {
+		$('#sidebar-2').removeClass("sidenav-fixed");
+		$('#burger-icon-2').removeClass("hide");
+	}
+});
+
+// ON RESIZE
+$(window).resize(function() {
+	if ($(window).width() >= 1925) {
+		$('#sidebar-2').addClass("sidenav-fixed");
+		$('#burger-icon-2').addClass("hide");
+	}
+	else {
+		$('#sidebar-2').removeClass("sidenav-fixed");
+		$('#burger-icon-2').removeClass("hide");
+	}
+});
+    
+
+
+    </script>
   </head>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  <body class="hold-transition skin-black fixed sidebar-mini">
-    <div class="wrapper">
-      <!-- Main Header -->
-      <%= render 'layouts/main_header' %>
-      <!-- Left side column. contains the logo and sidebar -->
-      <%= render 'layouts/main_sidebar' %>
+    
+  <body>
+    <header>
+	<nav>
+		<div class="nav-wrapper">
+			<div class="row">
+				<div class="col s12">
+					<a id="burger-icon-1" href="#" data-target="sidebar-1" class="left sidenav-trigger show-on-medium"><i class="material-icons">menu</i></a>
+					<a id="burger-icon-2" href="#" data-target="sidebar-2" class="right sidenav-trigger show-on-large"><i class="material-icons">menu</i></a>
+					<a href="https://codepen.io/collection/nbBqgY" target="_blank" class="brand-logo">Materialize Framework</a>
+					<ul id="nav-mobile" class="right hide-on-med-and-down">
+						<li><a href="https://codepen.io/collection/nbBqgY" target="_blank" >Menu item</a></li>
+						<li><a href="https://codepen.io/collection/nbBqgY" target="_blank" >Menu item</a></li>
+						<li><a href="https://codepen.io/collection/nbBqgY" target="_blank" >Menu item</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</nav>
+</header>
 
-      <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-        </section>
-        <!-- Main content -->
-        <section class="content container-fluid">
-          <%= render 'layouts/helpers/success' %>
-          <%= render 'layouts/helpers/flash_error' %>
-          <%= yield %>
-        </section>
-        <!-- /.content -->
-      </div>
-    <!-- /.content-wrapper -->
-      <%= render 'layouts/main_footer' %>
 
-    </div>
-    <!-- /.wrapper -->
+<!-- SIDEBAR 1 - HAS .SIDENAV-FIXED -->
+<ul id="sidebar-1" class="sidenav sidenav-fixed">
+	<li>
+		<div class="user-view">
+			<div class="background">
+				<img src="http://placehold.it/640x480/555">
+			</div>
+			<a href="#!user"><img class="circle" src="http://placehold.it/512x512/333"></a>
+			<a href="#!name"><span class="white-text name">John Doe</span></a>
+			<a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+		</div>
+	</li>
+	<li><a href="https://github.com/dogfalo/materialize/" target="_blank">Github</a></li>
+	<li><a href="https://twitter.com/MaterializeCSS" target="_blank">Twitter</a></li>
+	<li><a href="http://next.materializecss.com/getting-started.html" target="_blank">Docs</a></li>
+</ul>
+
+
+
+
+<!-- SIDEBAR 2 - DOES NOT HAVE .SIDENAV-FIXED -->
+<ul id="sidebar-2" class="sidenav right-aligned">
+	<li><a class="subheader">Sidebar 2</a></li>
+	<li><a href="https://github.com/dogfalo/materialize/" target="_blank">Github</a></li>
+	<li><a href="https://twitter.com/MaterializeCSS" target="_blank">Twitter</a></li>
+	<li><a href="http://next.materializecss.com/getting-started.html" target="_blank">Docs</a></li>
+	<li><div class="divider"></div></li>
+</ul>
+
+
+
+
+<main>
+	<div class="container">
+		<h1 class="center">Dual sidebars</h1>
+		<p class="flow-text">Don't forget to hit the like button if you found this useful.</p>
+		<p>
+			On an ultra wide screen (21:9), you may want to have the second sidebar of a dual sidebar setup in Materialize become visible automatically. This method will allow you to do that. The second sidebar behaves like a mobile sidebar until the window is wide enough that it could obviously safely accomodate it in it's fixed state. The class <strong>.sidebar-fixed</strong> is added via Javascript.
+		</p>
+		<p>
+			To see this in action resize your window on a very wide screeen. (The breakpoint is set for 1925px).
+		</p>
+		<p class="center">
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/BDlhSNAuHw8?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+		</p>
+	</div>
+</main>
+
+
+
+
+
+
+<!-- Gitter Chat Link -->
+<div class="fixed-action-btn"><a class="btn-floating btn-large red" href="https://gitter.im/Dogfalo/materialize" target="_blank"><i class="large material-icons">chat</i></a></div>
+  
   </body>
+  
+  
+  
+  
 </html>
