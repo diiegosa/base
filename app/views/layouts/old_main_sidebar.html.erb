@@ -7,6 +7,7 @@
       <li class="header"></li>
       <li class=""><a href="/"><i class="fa fa-home"></i> <span>Home</span></a></li>
       <% make_menu.each do |menu|%>
+        <%= abort make_menu.inspect  %>
         <% if menu[:children].empty? %>
           <% if can?(menu[:action].to_sym, menu[:model].constantize)  %>
             <li class="">

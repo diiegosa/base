@@ -1,18 +1,40 @@
-<nav> <!-- navbar content here  --> </nav>
-
-  <ul id="slide-out" class="sidenav">
-    <li><div class="user-view">
+<!-- SIDEBAR 1 - HAS .SIDENAV-FIXED -->
+<ul id="sidebar-1" class="sidenav sidenav-fixed">
+  <li>
+    <div class="user-view">
       <div class="background">
-        <img src="images/office.jpg">
+        <img src="http://placehold.it/640x480/555">
       </div>
-      <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
-      <a href="#name"><span class="white-text name">John Doe</span></a>
-      <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
-    </div></li>
-    <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-    <li><a href="#!">Second Link</a></li>
-    <li><div class="divider"></div></li>
-    <li><a class="subheader">Subheader</a></li>
-    <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
-  </ul>
-  <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+      <a href="#!user"><img class="circle" src="http://placehold.it/512x512/333"></a>
+      <a href="#!name"><span class="white-text name"><%= current_user.name %></span></a>
+      <a href="#!email"><span class="white-text email"><%= current_user.email %></span></a>
+    </div>
+  </li>
+  <li><a href="/" target="_blank">Home</a></li>
+  <% make_menu.each do |menu|%>
+    <li>
+      <% if menu[:children].empty? %>
+        <% if can?(menu[:action].to_sym, menu[:model].constantize)  %>
+          <a href="<%= url_for(menu[:model].constantize) %>"><%= translate_module(menu[:model]) %></a>
+        <% end %>
+      <% else %>
+        <% menu[:children].each do |item|%>
+          <% if can?(item[:action].to_sym, item[:model].constantize)  %>
+            <a href="<%= url_for(item[:model].constantize) %>"><%= translate_module(item[:model]) %></a>
+          <% end %>
+        <% end %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<!-- SIDEBAR 2 - DOES NOT HAVE .SIDENAV-FIXED -->
+<!--
+    <ul id="sidebar-2" class="sidenav right-aligned">
+			<li><a class="subheader">Sidebar 2</a></li>
+			<li><a href="https://github.com/dogfalo/materialize/" target="_blank">Github</a></li>
+			<li><a href="https://twitter.com/MaterializeCSS" target="_blank">Twitter</a></li>
+			<li><a href="http://next.materializecss.com/getting-started.html" target="_blank">Docs</a></li>
+			<li><div class="divider"></div></li>
+		</ul>
+-->
