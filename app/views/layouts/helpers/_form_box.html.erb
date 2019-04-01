@@ -1,52 +1,43 @@
-<div class="box box-default">
-  <div class="box-header with-border">
-    <h3 class="box-title">
-      <%= translate_module(model, :one) %>
-      <small><%= translate_action(action) %></small>
-    </h3>
-  </div>
-  <div class="box-body">
-    <!-- form start -->
-    <%= form_with(model: object, local: true, class: "form-horizontal", html: { multipart: true }) do |form| %>
-      <%= render  'layouts/helpers/error', object: object %>
-      <% fields.each do |field| %>
-        <div class="form-group">
+<div class="row">
+  <div class="card z-depth-4">
+    <div class="card-content">
+      <span class="card-title">
+        <%= translate_module(model, :one) %>
+        <small><%= translate_action(action) %></small>
+      </span>
+      <div class="card-action"></div>
+      <%= form_with(model: object, local: true, class: "form-horizontal", html: { multipart: true }) do |form| %>
+
+
+        <% fields.each do |field| %>
+        <div class="input-field">
           <% if field[:kind] === :text_field %>
-            <label class="col-sm-2 control-label"><%= translate_attr(field[:name], model) %></label>
-            <div class="col-sm-9">
-              <%= form.text_field field[:name], class: "form-control #{field[:extra_class]}" %>
-            </div>
+            <%= form.text_field field[:name], class: "validate #{field[:extra_class]}", id: field[:name] %>
+            <label for="<%= field[:name] %>"><%= translate_attr(field[:name], model) %></label>
           <% elsif field[:kind] === :number_field %>
-            <label class="col-sm-2 control-label"><%= translate_attr(field[:name], model) %></label>
-            <div class="col-sm-9">
-              <%= form.number_field field[:name], class: "form-control #{field[:extra_class]}", step: field[:step] %>
-            </div>
+            <%= form.number_field field[:name], class: "form-control #{field[:extra_class]}", id: field[:name], step: field[:step] %>
+            <label for="<%= field[:name] %>"><%= translate_attr(field[:name], model) %></label>
           <% elsif field[:kind] === :password_field %>
-            <label class="col-sm-2 control-label"><%= translate_attr(field[:name], model) %></label>
-            <div class="col-sm-9">
-              <%= form.password_field field[:name], class: "form-control #{field[:extra_class]}" %>
-            </div>
+            <%= form.password_field field[:name], class: "#{field[:extra_class]} validate", id: field[:name] %>
+            <label for="<%= field[:name] %>"><%= translate_attr(field[:name], model) %></label>
           <% elsif field[:kind] === :text_area %>
-            <label class="col-sm-2 control-label"><%= translate_attr(field[:name], model) %></label>
-            <div class="col-sm-9">
-              <%= form.text_area field[:name], class: "form-control #{field[:extra_class]}", rows: 4 %>
-            </div>
+            <%= form.text_area field[:name], class: "materialize-textarea #{field[:extra_class]}", id: field[:name] %>
+            <label for="<%= field[:name] %>"><%= translate_attr(field[:name], model) %></label>
           <% elsif field[:kind] === :select %>
-            <label class="col-sm-2 control-label"><%= translate_attr(field[:name], model) %></label>
-            <div class="col-sm-9">
-              <%= form.select(field[:name], field[:collection], { prompt: 'Selecionar ...'},
-                { class: "form-control #{field[:extra_class]}" }) %>
-            </div>
+            <%= form.select(field[:name], field[:collection], { class: "#{field[:extra_class]}" }) %>
+            <label><%= translate_attr(field[:name], model) %></label>
           <% elsif field[:kind] === :multselect %>
-            <label class="col-sm-2 control-label"><%= translate_attr(field[:name], model) %></label>
-            <div class="col-sm-9">
-              <%= form.select(field[:name], field[:collection], {},
-                { class: "form-control #{field[:extra_class]}", multiple: true, title: "Selecionar ..." }) %>
-            </div>
+            <%= form.select(field[:name], field[:collection], { class: "#{field[:extra_class]}", multiple: 'multiple' }) %>
+            <label><%= translate_attr(field[:name], model) %></label>
           <% elsif field[:kind] === :file_field %>
-            <label class="col-sm-2 control-label"><%= translate_attr(field[:name], model) %></label>
-            <div class="col-sm-9">
-              <%= form.file_field field[:name] %>
+            <div class="file-field input-field">
+              <div class="btn">
+                <span><%= translate_attr(field[:name], model) %></span>
+                <input type="file">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
             </div>
             <% if object.send(field[:name]).present? %>
           </div>
@@ -65,11 +56,13 @@
         </div>
       <% end %>
 
-      <div class="box-footer">
-        <%= link_to translate_action(:back), model_path, class: "btn btn-default" %>
-        <button type="submit" class="btn btn-info pull-right"><%= translate_action(btn_action) %></button>
-      </div>
-      <!-- /.box-footer -->
-    <% end %>
+
+
+
+      <% end %>
+    </div>
   </div>
 </div>
+
+
+  

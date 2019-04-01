@@ -1,27 +1,23 @@
-<div class="box-header with-border">
-  <h3 class="box-title">
-    <strong><%= translate_module(model, :other) %></strong>
-  </h3>
-  <hr>
-  <div class="row">
-    <div class="col-md-8">
-      <%= search_form_for @q do |f| %>
-        <div class="input-group input-group-sm">
-          <%= f.search_field search_match, class: "form-control" %>
-            <span class="input-group-btn">
-              <button type="submit" class="btn btn-default btn-flat">
-                <i class="fa fa-search"></i>
-              </button>
-            </span>
-        </div>
-      <% end %>
+<span class="card-title"><strong><%= translate_module(model, :other) %></strong></span>
+<div class="card-action">
+  <%= search_form_for @q do |f| %>
+    <div class="left input-field">
+      <%= f.search_field search_match, type: "text", class: "autocomplete", id: "autocomplete-input" %>
+      <button class="btn-floating btn-flat waves-effect waves-light teal lighten-1 prefix"><i class="material-icons">search</i></button>
     </div>
-    <div class="col-md-4">
-      <%= link_to translate_action(:create),
+  <% end %>
+  
+  <div class="right input-field">
+    <%= link_to translate_action(:create),
         { controller: controller, action: :new },
-        class: 'btn btn-primary pull-right' %>
-    </div>
+        class: 'waves-effect waves-light btn' %>
   </div>
-
+  
 </div>
+
+
+
+
+
+
 
