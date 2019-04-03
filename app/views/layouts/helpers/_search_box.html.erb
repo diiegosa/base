@@ -3,7 +3,9 @@
   <%= search_form_for @q do |f| %>
     <div class="left input-field">
       <%= f.search_field search_match, type: "text", class: "autocomplete", id: "autocomplete-input" %>
-      <button class="btn-floating btn-flat waves-effect waves-light teal lighten-1 prefix"><i class="material-icons">search</i></button>
+      <div class="right">
+        <button class="btn-floating btn-flat waves-effect waves-light teal lighten-1 prefix"><i class="material-icons">search</i></button>
+      </div>
     </div>
   <% end %>
   
