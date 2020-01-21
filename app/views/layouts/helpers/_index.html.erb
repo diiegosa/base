@@ -1,42 +1,77 @@
-<div class="box box-default">
-  <%= render 'layouts/helpers/search_box',
-    model: model,
-    controller: controller,
-    search_match: search_match %>
-  <div class="box-body">
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <% attributes.each do |attr| %>
-            <th> <%= attr.is_a?(Hash) ? translate_attr(attr[:model], model) : translate_attr(attr, model) %> </th>
-          <% end %>
-          <th colspan="<%= actions.count %>"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% collection.each do |object| %>
-          <tr>
-            <% attributes.each do |attr| %>
-              <td> <%= attr.is_a?(Hash) ? object.send(attr[:model])[attr[:attr]] : object[attr] %> </td>
+<% content_for :header_page do %>
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1><%= translate_module(model, :other) %></h1>
+      </div>
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Blank Page</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+<% end %>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"><%= translate_module(model, :other) %></h3>
+
+        <div class="card-tools">
+          <div class="row">
+          <%= link_to translate_action(:create),
+          { controller: controller, action: :new },
+          class: 'btn btn-primary btn-sm mr-3' %>
+
+          <%= render 'layouts/helpers/search_box',
+            model: model,
+            controller: controller,
+            search_match: search_match %>
+            </div>
+        </div>
+      </div>
+      <!-- /.card-header -->
+      <div class="card-body table-responsive p-0">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <% attributes.each do |attr| %>
+                <th> <%= attr.is_a?(Hash) ? translate_attr(attr[:model], model) : translate_attr(attr, model) %> </th>
+              <% end %>
+              <th colspan="<%= actions.count %>"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% collection.each do |object| %>
+              <tr>
+                <% attributes.each do |attr| %>
+                  <td> <%= attr.is_a?(Hash) ? object.send(attr[:model])[attr[:attr]] : object[attr] %> </td>
+                <% end %>
+                <td align="center">
+                  <% if actions.include?(:show) %>
+                    <%= link_to object, class: 'btn btn-default btn-sm' do %>
+                      <i class="far fa-file-text"></i>
+                    <% end %>
+                  <% end %>
+                  <% if actions.include?(:edit) %>
+                    <%= link_to [:edit, object], class: 'btn btn-info btn-sm' do %>
+                      <i class="far fa-edit"></i>
+                    <% end %>
+                  <% end %>
+                  <% if actions.include?(:delete) %>
+                    <%= render 'layouts/helpers/delete', object: object, identification: delete_identification %>
+                  <% end %>
+                </td>
+              </tr>
             <% end %>
-            <td align="center">
-              <% if actions.include?(:show) %>
-                <%= link_to object, class: 'btn btn-default btn-sm' do %>
-                  <i class="fa fa-file-text"></i>
-                <% end %>
-              <% end %>
-              <% if actions.include?(:edit) %>
-                <%= link_to [:edit, object], class: 'btn btn-info btn-sm' do %>
-                  <i class="fa fa-edit"></i>
-                <% end %>
-              <% end %>
-              <% if actions.include?(:delete) %>
-                <%= render 'layouts/helpers/delete', object: object, identification: delete_identification %>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+          </tbody>
+        </table>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
   </div>
 </div>

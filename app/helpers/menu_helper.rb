@@ -1,7 +1,7 @@
 module MenuHelper
 
   def make_menu
-    default_icon = 'fa fa-chevron-circle-right'
+    default_icon = 'far fa-circle '
     [
       { model: 'Usuários', icon: 'fa fa-users', children:
         [

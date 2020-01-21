@@ -13,9 +13,9 @@
 //= require rails-ujs
 //= require jquery/dist/jquery.min
 //= require turbolinks
-//= require bootstrap/dist/js/bootstrap.min
-//= require bootstrap-select/dist/js/bootstrap-select.min.js
-//= require admin-lte/dist/js/adminlte.js
+//= require bootstrap
+//= require admin-lte/dist/js/adminlte
+// require bootstrap-select/dist/js/bootstrap-select.min.js
 //= require plugins/jquery.maskMoney.min
 //= require_tree .
 

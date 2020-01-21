@@ -12,10 +12,8 @@
  *
  *= require_tree .
  *= require_self
- *= require bootstrap/dist/css/bootstrap.min.css
- *= require font-awesome/css/font-awesome.min.css
+ *= require font_awesome5_webfont
  *= require ionicons/dist/css/ionicons.min.css
+ *= require admin-lte/dist/css/adminlte
  *= require bootstrap-select/dist/css/bootstrap-select.min.css
- *= require admin-lte/dist/css/AdminLTE.min.css
- *= require admin-lte/dist/css/skins/_all-skins.min.css
  */

@@ -42,6 +42,12 @@ gem 'jbuilder', '~> 2.5'
 # React
 gem 'webpacker', '~> 3.3', '>= 3.3.1'
 
+# The most popular HTML, CSS, and JavaScript framework for developing responsive, mobile first projects on the web. http://getbootstrap.com
+gem 'bootstrap', '~> 4.4.1'
+
+# Font_awesome5_rails provides Font-Awesome 5 support.
+gem 'font_awesome5_rails'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
