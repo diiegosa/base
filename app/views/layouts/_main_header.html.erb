@@ -11,9 +11,11 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
-          <i class="fas fa-th-large"></i>
-        </a>
+        <% if user_signed_in? %>
+          <a rel="nofollow" class="nav-link" href="/users/sign_out">
+            Sair
+          </a>
+        <% end %>
       </li>
     </ul>
   </nav>

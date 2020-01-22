@@ -17,6 +17,7 @@
 //= require admin-lte/dist/js/adminlte
 // require bootstrap-select/dist/js/bootstrap-select.min.js
 //= require plugins/jquery.maskMoney.min
+//= require toastr
 //= require_tree .
 
 
@@ -25,6 +26,13 @@ document.addEventListener('turbolinks:load', () => $(window).trigger('resize'));
 
 // Active menu items
 $(document).ready(function () {
+
+  if(!JSON.parse(localStorage.getItem('sidebar_collapsed'))) { $('body').addClass('sidebar-collapse'); }
+
+  $('a.nav-link[data-widget="pushmenu"]').on("click", function(){
+    localStorage.setItem('sidebar_collapsed', $('body').hasClass('sidebar-collapse'));
+  });
+  
   var url = window.location;
   // for sidebar menu entirely but not cover treeview
   $('ul.sidebar-menu a').filter(function () {

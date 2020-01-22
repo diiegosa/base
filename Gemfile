@@ -48,6 +48,8 @@ gem 'bootstrap', '~> 4.4.1'
 # Font_awesome5_rails provides Font-Awesome 5 support.
 gem 'font_awesome5_rails'
 
+gem 'toastr-rails'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

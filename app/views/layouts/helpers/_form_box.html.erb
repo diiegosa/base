@@ -1,75 +1,86 @@
-<div class="box box-default">
-  <div class="box-header with-border">
-    <h3 class="box-title">
-      <%= translate_module(model, :one) %>
-      <small><%= translate_action(action) %></small>
-    </h3>
-  </div>
-  <div class="box-body">
-    <!-- form start -->
-    <%= form_with(model: object, local: true, class: "form-horizontal", html: { multipart: true }) do |form| %>
-      <%= render  'layouts/helpers/error', object: object %>
-      <% fields.each do |field| %>
-        <div class="form-group">
-          <% if field[:kind] === :text_field %>
-            <label class="col-sm-2 control-label"><%= translate_attr(field[:name], model) %></label>
-            <div class="col-sm-9">
-              <%= form.text_field field[:name], class: "form-control #{field[:extra_class]}" %>
-            </div>
-          <% elsif field[:kind] === :number_field %>
-            <label class="col-sm-2 control-label"><%= translate_attr(field[:name], model) %></label>
-            <div class="col-sm-9">
-              <%= form.number_field field[:name], class: "form-control #{field[:extra_class]}", step: field[:step] %>
-            </div>
-          <% elsif field[:kind] === :password_field %>
-            <label class="col-sm-2 control-label"><%= translate_attr(field[:name], model) %></label>
-            <div class="col-sm-9">
-              <%= form.password_field field[:name], class: "form-control #{field[:extra_class]}" %>
-            </div>
-          <% elsif field[:kind] === :text_area %>
-            <label class="col-sm-2 control-label"><%= translate_attr(field[:name], model) %></label>
-            <div class="col-sm-9">
-              <%= form.text_area field[:name], class: "form-control #{field[:extra_class]}", rows: 4 %>
-            </div>
-          <% elsif field[:kind] === :select %>
-            <label class="col-sm-2 control-label"><%= translate_attr(field[:name], model) %></label>
-            <div class="col-sm-9">
-              <%= form.select(field[:name], field[:collection], { prompt: 'Selecionar ...'},
-                { class: "form-control #{field[:extra_class]}" }) %>
-            </div>
-          <% elsif field[:kind] === :multselect %>
-            <label class="col-sm-2 control-label"><%= translate_attr(field[:name], model) %></label>
-            <div class="col-sm-9">
-              <%= form.select(field[:name], field[:collection], {},
-                { class: "form-control #{field[:extra_class]}", multiple: true, title: "Selecionar ..." }) %>
-            </div>
-          <% elsif field[:kind] === :file_field %>
-            <label class="col-sm-2 control-label"><%= translate_attr(field[:name], model) %></label>
-            <div class="col-sm-9">
-              <%= form.file_field field[:name] %>
-            </div>
-            <% if object.send(field[:name]).present? %>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-2 control-label"><%= translate_attr(field[:name], model) %> (download)</label>
-              <div class="col-sm-9">
-                <div class="col-sm-3">
-                  <%= link_to "Clique para baixar o arquivo", object.send(field[:name]).url(:original, false), target: "_blank" %>
+<% content_for :header_page do %>
+  <%= render 'layouts/helpers/title_page', model: model %>
+<% end %>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"><%= translate_action(action) %></h3>
+      </div>
+      <!-- /.card-header -->
+      
+      <!-- form start -->
+      <%= form_with(model: object, local: true, class: "form-horizontal", html: { multipart: true }) do |form| %>
+
+        <%= render  'layouts/helpers/error', object: object %>
+
+        <div class="card-body">
+
+          <% fields.each do |field| %>
+            <div class="form-group row">
+              <% if field[:kind] === :text_field %>
+                <label class="col-sm-2 control-label text-right"><%= translate_attr(field[:name], model) %></label>
+                <div class=<%= "col-sm-#{field[:input_size]}" %> >
+                  <%= form.text_field field[:name], class: "form-control #{field[:extra_class]}" %>
                 </div>
-                <div class="col-sm-1">
-                  <%= render 'layouts/helpers/attachment_delete', attachment_name: field[:name].to_s %>
+              <% elsif field[:kind] === :number_field %>
+                <label class="col-sm-2 control-label text-right"><%= translate_attr(field[:name], model) %></label>
+                <div class=<%= "col-sm-#{field[:input_size]}" %>>
+                  <%= form.number_field field[:name], class: "form-control #{field[:extra_class]}", step: field[:step] %>
                 </div>
+              <% elsif field[:kind] === :password_field %>
+                <label class="col-sm-2 control-label text-right"><%= translate_attr(field[:name], model) %></label>
+                <div class=<%= "col-sm-#{field[:input_size]}" %>>
+                  <%= form.password_field field[:name], class: "form-control #{field[:extra_class]}" %>
+                </div>
+              <% elsif field[:kind] === :text_area %>
+                <label class="col-sm-2 control-label text-right"><%= translate_attr(field[:name], model) %></label>
+                <div class=<%= "col-sm-#{field[:input_size]}" %>>
+                  <%= form.text_area field[:name], class: "form-control #{field[:extra_class]}", rows: 4 %>
+                </div>
+              <% elsif field[:kind] === :select %>
+                <label class="col-sm-2 control-label text-right"><%= translate_attr(field[:name], model) %></label>
+                <div class=<%= "col-sm-#{field[:input_size]}" %>>
+                  <%= form.select(field[:name], field[:collection], { prompt: 'Selecionar ...'},
+                    { class: "form-control #{field[:extra_class]}" }) %>
+                </div>
+              <% elsif field[:kind] === :multselect %>
+                <label class="col-sm-2 control-label text-right"><%= translate_attr(field[:name], model) %></label>
+                <div class=<%= "col-sm-#{field[:input_size]}" %>>
+                  <%= form.select(field[:name], field[:collection], {},
+                    { class: "form-control #{field[:extra_class]}", multiple: true, title: "Selecionar ..." }) %>
+                </div>
+              <% elsif field[:kind] === :file_field %>
+                <label class="col-sm-2 control-label text-right"><%= translate_attr(field[:name], model) %></label>
+                <div class=<%= "col-sm-#{field[:input_size]}" %>>
+                  <%= form.file_field field[:name] %>
+                </div>
+                <% if object.send(field[:name]).present? %>
               </div>
-            <% end %>
+              <div class="form-group">
+                <label class="col-sm-2 control-label text-right"><%= translate_attr(field[:name], model) %> (download)</label>
+                  <div class=<%= "col-sm-#{field[:input_size]}" %>>
+                    <div class="col-sm-3">
+                      <%= link_to "Clique para baixar o arquivo", object.send(field[:name]).url(:original, false), target: "_blank" %>
+                    </div>
+                    <div class="col-sm-1">
+                      <%= render 'layouts/helpers/attachment_delete', attachment_name: field[:name].to_s %>
+                    </div>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
           <% end %>
+
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+          <%= link_to translate_action(:back), model_path, class: "btn btn-default" %>
+          <button type="submit" class="btn btn-info float-right"><%= translate_action(btn_action) %></button>
         </div>
       <% end %>
-
-      <div class="box-footer">
-        <%= link_to translate_action(:back), model_path, class: "btn btn-default" %>
-        <button type="submit" class="btn btn-info pull-right"><%= translate_action(btn_action) %></button>
-      </div>
-      <!-- /.box-footer -->
-    <% end %>
-  </div>
-</div>
+    </div>
+  </div><!--/.col-12-->
+</div><!--/.row-->
