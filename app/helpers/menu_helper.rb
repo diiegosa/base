@@ -12,4 +12,13 @@ module MenuHelper
     ]
   end
 
+  def navlink_active?(item)
+    item[:path] == controller_name ? "active" : nil
+  end
+  
+  def treeview_active?(item)
+    item[:children].each do |item|
+      return "menu-open" unless navlink_active?(item).nil?
+    end
+  end
 end

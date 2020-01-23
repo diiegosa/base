@@ -36,13 +36,13 @@
             <% if menu[:children].empty? %>
               <% if can?(menu[:action].to_sym, menu[:model].constantize)  %>
                 <li class="nav-item">
-                  <a href="<%= url_for(menu[:model].constantize) %>">
+                  <a href="<%= url_for(menu[:model].constantize) %>" class="nav-link <%= navlink_active?(menu) %>">
                     <i class="nav-icon <%= menu[:icon] %>"></i> <span><%= translate_module(menu[:model]) %></span>
                   </a>
                 </li>
               <% end %>
             <% else %>
-              <li class="nav-item has-treeview">
+              <li class="nav-item has-treeview <%= treeview_active?(menu) %> ">
                 <a href="#" class="nav-link">
                   <i class="nav-icon <%= menu[:icon] %>"></i>
                   <p>
@@ -50,11 +50,11 @@
                     <i class="fas fa-angle-left right"></i>
                   </p>
                 </a>
-                <ul class="nav nav-treeview">
+                <ul class="nav nav-treeview ">
                   <% menu[:children].each do |item|%>
                     <% if can?(item[:action].to_sym, item[:model].constantize)  %>
                       <li class="nav-item">
-                        <a href="<%= url_for(item[:model].constantize) %>" class="nav-link">
+                        <a href="<%= url_for(item[:model].constantize) %>" class="nav-link <%= navlink_active?(item) %>">
                           <i class="nav-icon <%= item[:icon] %>"></i>
                           <p><%= translate_module(item[:model]) %></p>
                         </a>
