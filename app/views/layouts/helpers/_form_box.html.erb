@@ -43,7 +43,7 @@
                 <label class="col-sm-2 control-label text-right"><%= translate_attr(field[:name], model) %></label>
                 <div class=<%= "col-sm-#{field[:input_size]}" %>>
                   <%= form.select(field[:name], field[:collection], { prompt: 'Selecionar ...'},
-                    { class: "form-control #{field[:extra_class]}" }) %>
+                    { class: "form-control #{field[:extra_class]}", 'data-live-search': "true" }) %>
                 </div>
               <% elsif field[:kind] === :multselect %>
                 <label class="col-sm-2 control-label text-right"><%= translate_attr(field[:name], model) %></label>
